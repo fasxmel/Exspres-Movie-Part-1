@@ -46,9 +46,9 @@ exports.search = (title, genre, year) => {
 
 
 exports.create = (movieData) => {
-    movieData._id = result[result.length - 1]._id + 1;
+    movieData._id = movies[movies.length - 1]._id + 1;
 
-     result.push(movieData);
+     movies.push(movieData);
 }
 
 
