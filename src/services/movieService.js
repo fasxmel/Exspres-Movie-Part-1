@@ -25,37 +25,37 @@ exports.getAll = async () => {
    return movies;
 }
 
-// exports.getOne = (movieId) => {
-//     const movie =  result.find(movie => movie._id == movieId);
+exports.getOne = (movieId) => {
+    const movie =  result.find(movie => movie._id == movieId);
    
-//    return movie;
-// }
+   return movie;
+}
 
-// exports.search = (title, genre, year) => {
-//     let result =  movies.slice();
+exports.search = (title, genre, year) => {
+    let result =  movies.slice();
    
-//    if (title) {
-//     result = result.filter(movie => movie.title.toLocaleLowerCase().includes(title.toLocaleLowerCase())); 
-//    }
+   if (title) {
+    result = result.filter(movie => movie.title.toLocaleLowerCase().includes(title.toLocaleLowerCase())); 
+   }
 
-//    if (genre) {
-//     result = result.filter(movie => movie.genre.toLocaleLowerCase() === genre.toLocaleLowerCase()); 
-//    }
+   if (genre) {
+    result = result.filter(movie => movie.genre.toLocaleLowerCase() === genre.toLocaleLowerCase()); 
+   }
 
-//    if (year) {
-//     result = result.filter(movie => movie.year === year); 
-//    }
+   if (year) {
+    result = result.filter(movie => movie.year === year); 
+   }
 
-//    return result;
-// }
+   return result;
+}
 
 
 
-// exports.create = (movieData) => {
-//     movieData._id = movies[movies.length - 1]._id + 1;
+exports.create = (movieData) => {
+    movieData._id = movies[movies.length - 1]._id + 1;
 
-//      movies.push(movieData);
-// }
+     movies.push(movieData);
+}
 
 
 
