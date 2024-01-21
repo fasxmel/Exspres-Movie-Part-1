@@ -1,13 +1,17 @@
 const router = require('express').Router();
-const movieService = require('../services/movieService')
+const movieService = require('../controllers/movieController');
+const Movie = require('../models/movie');
 
 router.get('/create', (req, res) => {
     res.render('create')
 });
 
-router.post('/create', (req, res) => {
-   const newMovie = req.body;
-   movieService.create(newMovie)
+router.post('/create', async (req, res) => {
+   const {title, genre, director, year, imageUrl, rating, description} = req.body;
+   
+   let movie = new Movie({ title, genre, director, year, imageUrl, rating, description });
+
+    await movie.save();
 
     res.redirect('/')
 });

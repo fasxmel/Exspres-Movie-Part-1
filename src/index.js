@@ -14,4 +14,4 @@ app.use(routes);
 
 initDB()
   .then(() =>app.listen(PORT, () => console.log(`Server is runing on port ${PORT}...`)))
-  .catch((err) => console.error(err));
+  .catch((err) => console.error(err.messege));
