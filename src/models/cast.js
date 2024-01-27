@@ -24,7 +24,7 @@ const castSchema = new Schema({
         max: 10,
     
         },
-    castImage: {
+    image: {
         type: String, 
         required: true,
         match: /^https?:\/\//,
@@ -32,6 +32,6 @@ const castSchema = new Schema({
     
 });
 
-const Cast = model('Cast', movieSchema);
+const Cast = model('Cast', castSchema);
 
 module.exports = Cast;
