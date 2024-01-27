@@ -3,7 +3,6 @@ const movieService = require('../services/movieService')
 
 router.get('/', async (req, res) => {
     const movies = await  movieService.getAll();
-
     res.render('home', { movies })
 });
 
@@ -18,8 +17,6 @@ router.get('/search', (req, res) => {
 
     res.render('search', { movies: moviesResult, title, genre, year });
 });
-
-
 
 router.get('/404', (req, res) => {
     

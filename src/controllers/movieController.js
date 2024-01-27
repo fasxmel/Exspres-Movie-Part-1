@@ -1,19 +1,22 @@
 const router = require('express').Router();
-const movieService = require('../controllers/movieController');
-const Movie = require('../models/movie');
+const movieService = require('../services/movieService');
+
 
 router.get('/create', (req, res) => {
     res.render('create')
 });
 
 router.post('/create', async (req, res) => {
-   const {title, genre, director, year, imageUrl, rating, description} = req.body;
+   const newMovie = reg.body;
+try {
+    await movieService.create(newMovie);
+} catch (error) {
+    console.error(error);
+    res.redirect('/create');
+}
    
-   let movie = new Movie({ title, genre, director, year, imageUrl, rating, description });
-
-    await movie.save();
-
-    res.redirect('/')
+   
+   res.redirect('/')
 });
 
 router.get('/movies/:movieId', (req, res) => {
@@ -23,7 +26,5 @@ router.get('/movies/:movieId', (req, res) => {
     movie.ratingStars = '&#x2605;'.repeat(movie.rating);
     res.render('details', { movie })
 });
-
-
 
 module.exports = router;
