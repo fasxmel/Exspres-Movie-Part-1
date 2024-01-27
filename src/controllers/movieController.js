@@ -7,16 +7,15 @@ router.get('/create', (req, res) => {
 });
 
 router.post('/create', async (req, res) => {
-   const newMovie = reg.body;
+   const newMovie = req.body;
 try {
     await movieService.create(newMovie);
+    res.redirect('/');
 } catch (error) {
     console.error(error);
     res.redirect('/create');
 }
    
-   
-   res.redirect('/')
 });
 
 router.get('/movies/:movieId', (req, res) => {

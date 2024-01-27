@@ -4,17 +4,17 @@ const Movie = require('../models/movie');
 exports.getAll = async () => {
    let movies = await Movie.find().lean();
 
-   return movies;
+   return movies; 
 }
 
 exports.getOne = (movieId) => {
-    const movie =  result.find(movie => movie._id == movieId);
-   
-   return movie;
+   const movie =  Movie.findOne(movieId);
+
+   return movie; 
 }
 
-exports.search = (title, genre, year) => {
-    let result =  movies.slice();
+exports.search = async (movieData) => {
+    let result = Movie.slice();
    
    if (title) {
     result = result.filter(movie => movie.title.toLocaleLowerCase().includes(title.toLocaleLowerCase())); 
@@ -28,7 +28,7 @@ exports.search = (title, genre, year) => {
     result = result.filter(movie => movie.year === year); 
    }
 
-   return result;
+   return await result;
 }
 
 exports.create = async (movieData) => {

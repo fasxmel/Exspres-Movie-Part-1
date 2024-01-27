@@ -10,11 +10,11 @@ const movieSchema = new Schema({
         type: String,
         required: true },
 
-    yaer: {
+    year: {
         type: Number, 
         required: true,
-        max: 2035,
         min: 1900,
+        max: 2030,
     
         },
     rating: {
@@ -30,7 +30,7 @@ const movieSchema = new Schema({
         maxLength: 1000,
     
         },
-    imageUR: {
+    imageUrl: {
         type: String, 
         required: true,
         match: /^https?/,
