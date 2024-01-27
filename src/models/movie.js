@@ -33,7 +33,7 @@ const movieSchema = new Schema({
     imageUrl: {
         type: String, 
         required: true,
-        match: /^https?/,
+        match: /^https?:\/\//,
         },
     
 });

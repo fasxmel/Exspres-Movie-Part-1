@@ -18,12 +18,18 @@ try {
    
 });
 
-router.get('/movies/:movieId', (req, res) => {
+router.get('/movies/:movieId', async (req, res) => {
     const movieId = req.params.movieId;
-    const movie = movieService.getOne(movieId);
+    try {
+        const movie = await movieService.getOne(movieId).lean();
+        //TODO: stars functionality
+        movie.ratingStars = '&#x2605;'.repeat(movie.rating);
+        res.render('details', { movie })
 
-    movie.ratingStars = '&#x2605;'.repeat(movie.rating);
-    res.render('details', { movie })
+    } catch (error) {
+        console.error(error);
+    }
+       
 });
 
 module.exports = router;

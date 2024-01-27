@@ -3,7 +3,7 @@ const movieService = require('../services/movieService')
 
 router.get('/', async (req, res) => {
     try {
-        const movies = await  movieService.getAll();
+        const movies = await  movieService.getAll().lean();
         res.render('home', { movies })
     } catch (error) {
         console.error(error);
@@ -17,12 +17,12 @@ router.get('/about', (req, res) => {
     res.render('about');
 });
 
-router.get('/search', async (req, res) => {
-    const {title, genre, year} = req.query
-    const moviesResult = movieService.search(title, genre, year);
+// router.get('/search', async (req, res) => {
+//    const { title, genre, year } = req.params
+//     const moviesResult = await movieService.search( title, genre, year );
 
-    res.render('search', { movies: moviesResult, title, genre, year });
-});
+//     res.render('search', { moviesResult });
+// });
 
 router.get('/404', (req, res) => {
     

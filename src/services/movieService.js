@@ -1,21 +1,22 @@
 const Movie = require('../models/movie');
 
 
-exports.getAll = async () => {
-   let movies = await Movie.find().lean();
+exports.getAll = () => {
+   let movies =  Movie.find();
 
    return movies; 
 }
 
 exports.getOne = (movieId) => {
-   const movie =  Movie.findOne(movieId);
+   const movie = Movie.findById(movieId);
 
    return movie; 
 }
 
 exports.search = async (movieData) => {
-    let result = Movie.slice();
-   
+   // TODO: try catch block
+    let result = await Movie.find().lean();
+   // TODO: must be filtred on mongoDB
    if (title) {
     result = result.filter(movie => movie.title.toLocaleLowerCase().includes(title.toLocaleLowerCase())); 
    }
@@ -28,11 +29,11 @@ exports.search = async (movieData) => {
     result = result.filter(movie => movie.year === year); 
    }
 
-   return await result;
+   return result;
 }
 
-exports.create = async (movieData) => {
-   return await Movie.create(movieData);
+exports.create = (movieData) => {
+   return Movie.create(movieData);
 }
 
 
