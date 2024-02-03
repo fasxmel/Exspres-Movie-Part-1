@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const movieService = require('../services/movieService');
-
+const castService = require('../services/castService');
 
 router.get('/create', (req, res) => {
     res.render('create')
@@ -35,8 +35,11 @@ router.get('/movies/:movieId', async (req, res) => {
 router.get('/movies/:movieId/attach', async (req, res) => {
     //TODO: try catch block
      const movie = await movieService.getOne(req.params.movieId).lean();
-     res.render('cast/attach', { ...movie });
+     const casts = await castService.getAll().lean();
+     //TODO: remove exsistent cast from movie
+
+     res.render('cast/attach', { ...movie, casts});
 });
 
-
+ 
 module.exports = router;
