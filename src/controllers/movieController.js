@@ -32,8 +32,10 @@ router.get('/movies/:movieId', async (req, res) => {
        
 });
 
-router.get('/movies/:movieId/attach', (req, res) => {
-res.render('cast/attach')
+router.get('/movies/:movieId/attach', async (req, res) => {
+    //TODO: try catch block
+     const movie = await movieService.getOne(req.params.movieId).lean();
+     res.render('cast/attach', { ...movie });
 });
 
 
