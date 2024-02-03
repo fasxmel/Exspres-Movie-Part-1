@@ -32,4 +32,9 @@ router.get('/movies/:movieId', async (req, res) => {
        
 });
 
+router.get('/movies/:movieId/attach', (req, res) => {
+res.render('cast/attach')
+});
+
+
 module.exports = router;
