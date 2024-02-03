@@ -1,3 +1,4 @@
+const { move } = require('../controllers/movieController');
 const Movie = require('../models/movie');
 
 
@@ -34,6 +35,17 @@ exports.search = async (movieData) => {
 
 exports.create = (movieData) => {
    return Movie.create(movieData);
+}
+
+exports.attach = (movieId, castId) => {
+   //TODO: try catch block en validate castId is exsisten;
+   //TODO: validate castId is exsisten on DB;
+
+//   await this.getOne(movieId, castId);
+//   move.casts.push(castId);
+//   return move.save();
+
+return Movie.findByIdAndUpdate(movieId, {$push: { casts: castId } });
 }
 
 

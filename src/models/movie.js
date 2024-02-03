@@ -1,4 +1,4 @@
-const { Schema, model} = require('mongoose');
+const { Schema, model, default: mongoose} = require('mongoose');
 
 const movieSchema = new Schema({
     title: {
@@ -35,7 +35,10 @@ const movieSchema = new Schema({
         required: true,
         match: /^https?:\/\//,
         },
-    
+    casts: [{
+        type: mongoose.Types.ObjectId,
+        ref:'Cast',
+    }],
 });
 
 const Movie = model('Movie', movieSchema);
