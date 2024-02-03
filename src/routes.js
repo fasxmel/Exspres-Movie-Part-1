@@ -10,7 +10,7 @@ router.use('/cast',castCotroller);
 
 
 router.get('*', (req, res) => {
-    res.redirect('404')
+    res.redirect('/404')
 });
 
 module.exports = router;

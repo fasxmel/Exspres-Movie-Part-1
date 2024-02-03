@@ -24,10 +24,17 @@ const castSchema = new Schema({
         max: 10,
     
         },
-    image: {
+    castImage: {
         type: String, 
         required: true,
-        match: /^https?:\/\//,
+        validate: {
+            validator (value)
+            {
+              return  /^https?:\/\//.test(value);
+            }
+        },
+        message: (props) => `${props.value} is invalid url for this castImage!`
+
         }, 
     
 });
