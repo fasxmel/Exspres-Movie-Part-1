@@ -9,23 +9,30 @@ exports.getAll = () => {
 exports.getOne = (movieId) => Movie.findById(movieId).populate('casts');
 
 
-exports.search = async (title, genre, year) => {
-   // TODO: try catch block
-    let movies = await Movie.find().lean();
-   // TODO: must be filtred on mongoDB
-   if (title) {
-    movies = movies.filter(movie => movie.title.includes(title)); 
-   }
+exports.search = async (data) => {
+   let query = {}
 
-   if (genre) {
-    movies = movies.filter(movie => movie.genre === genre); 
-   }
+    if (!data.title && !data.genre && !data.year) {
+        
+        return []
+    }
 
-   if (year) {
-    movies = movies.filter(movie => movie.year === year); 
-   }
-  
-return movies;
+    if (data.title) {
+        query.title = data.title
+    }
+
+    if (data.genre) {
+        query.genre = data.genre
+    }
+
+    if (data.year) {
+        query.year = data.year
+    }
+    console.log(query)
+    let searchedMovies = await Movie.find(query).lean()
+
+   
+    return searchedMovies
 }
 
 exports.create = (movieData) => {
