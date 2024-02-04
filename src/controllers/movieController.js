@@ -19,17 +19,14 @@ try {
 });
 
 router.get('/movies/:movieId', async (req, res) => {
+     //TODO: try catch block
     const movieId = req.params.movieId;
-    try {
-        const movie = await movieService.getOne(movieId).lean();
-        //TODO: stars functionality
+    const movie = await movieService.getOne(movieId).lean();
+    //const casts = await castService.getByIds(movie.casts).lean();
+     //TODO: stars functionality
         movie.ratingStars = '&#x2605;'.repeat(movie.rating);
-        res.render('details', { movie })
-
-    } catch (error) {
-        console.error(error);
-    }
-       
+        res.render('details', { movie });
+     
 });
 
 router.get('/movies/:movieId/attach', async (req, res) => {

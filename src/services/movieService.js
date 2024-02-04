@@ -1,6 +1,4 @@
-const { move } = require('../controllers/movieController');
 const Movie = require('../models/movie');
-
 
 exports.getAll = () => {
    let movies =  Movie.find();
@@ -8,29 +6,26 @@ exports.getAll = () => {
    return movies; 
 }
 
-exports.getOne = (movieId) => {
-   const movie = Movie.findById(movieId);
+exports.getOne = (movieId) => Movie.findById(movieId).populate('casts');
 
-   return movie; 
-}
 
-exports.search = async (movieData) => {
+exports.search = async (title, genre, year) => {
    // TODO: try catch block
-    let result = await Movie.find().lean();
+    let movies = await Movie.find().lean();
    // TODO: must be filtred on mongoDB
    if (title) {
-    result = result.filter(movie => movie.title.toLocaleLowerCase().includes(title.toLocaleLowerCase())); 
+    movies = movies.filter(movie => movie.title.includes(title)); 
    }
 
    if (genre) {
-    result = result.filter(movie => movie.genre.toLocaleLowerCase() === genre.toLocaleLowerCase()); 
+    movies = movies.filter(movie => movie.genre === genre); 
    }
 
    if (year) {
-    result = result.filter(movie => movie.year === year); 
+    movies = movies.filter(movie => movie.year === year); 
    }
-
-   return result;
+  
+return movies;
 }
 
 exports.create = (movieData) => {

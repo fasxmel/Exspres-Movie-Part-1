@@ -14,15 +14,16 @@ router.get('/', async (req, res) => {
 
 router.get('/about', (req, res) => {
     
-    res.render('about');
+res.render('about');
 });
 
-// router.get('/search', async (req, res) => {
-//    const { title, genre, year } = req.params
-//     const moviesResult = await movieService.search( title, genre, year );
-
-//     res.render('search', { moviesResult });
-// });
+router.get('/search', async (req, res) => {
+ //const movies = await movieService.getAll().lean();
+const { title, genre, year } = req.query;
+const moviesResult = await movieService.search( title, genre, year );
+console.log(moviesResult);
+res.render('search', { moviesResult });
+});
 
 router.get('/404', (req, res) => {
     
