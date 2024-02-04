@@ -20,9 +20,10 @@ res.render('user/login');
 });
 
 router.post('/login', async (req, res) => {
-const userData = req.body;
-const user = await userService.login(userData);
+const { email, password } = req.body;
 
+const token =await userService.login(email, password);
+console.log(token);
 res.redirect('/');
 });
 
