@@ -1,4 +1,4 @@
-const { Schema, model, default: mongoose} = require('mongoose');
+const { Schema, model, default: mongoose } = require('mongoose');
 
 const movieSchema = new Schema({
     title: {
