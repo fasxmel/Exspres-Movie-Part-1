@@ -50,8 +50,10 @@ router.post('/movies/:movieId/attach', async (req, res) => {
 
 router.get('/movies/:movieId/edit', async (req, res) => {
     //TODO: try catch block
-    //const movie = await movieService.getOne(req.params.movieId).lean();
-    res.render('user/edit');
+    const movie = await movieService.getOne(req.params.movieId).lean();
+
+    
+    res.render('user/edit', { movie });
 });
  
 module.exports = router;
