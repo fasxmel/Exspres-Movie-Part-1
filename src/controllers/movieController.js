@@ -50,6 +50,11 @@ router.post('/movies/:movieId/attach', async (req, res) => {
 
 router.get('/movies/:movieId/edit', async (req, res) => {
     //TODO: try catch block
+    
+    if (!req.user) {
+        return res.redirect('/user/login');   
+    }
+
     const movie = await movieService.getOne(req.params.movieId).lean();
 
     
