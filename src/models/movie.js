@@ -45,6 +45,10 @@ const movieSchema = new Schema({
         type: mongoose.Types.ObjectId,
         ref:'Cast',
     }],
+    owner: [{
+        type: mongoose.Types.ObjectId,
+        ref:'User',
+    }],
 });
 
 const Movie = model('Movie', movieSchema);
