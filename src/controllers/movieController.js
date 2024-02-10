@@ -60,5 +60,15 @@ const movie = await movieService.getOne(req.params.movieId).lean();
    
 res.render('user/edit', { movie });
 });
+
+router.get("/movies/:movieId/delete", isAuth, async (req, res) => {
+    const id = req.params.movieId;
+
+    //TODO: try catch block
+
+    await movieService.deleteMovie(id)
+    res.redirect("/")
+})
+
  
 module.exports = router;
