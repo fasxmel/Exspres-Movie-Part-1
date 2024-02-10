@@ -24,6 +24,8 @@ const { email, password } = req.body;
 
 const token = await userService.login(email, password);
 
+
+res.cookie('user', token);
 res.redirect('/');
 });
 
