@@ -61,6 +61,14 @@ const movie = await movieService.getOne(req.params.movieId).lean();
 res.render('user/edit', { movie });
 });
 
+router.post('/movies/:movieId/edit', isAuth, async (req, res) => {
+    //TODO: try catch block
+    const movieId = req.params.movieId;
+    const movieData = req.body;
+    await movieService.updateMovie(movieId, movieData)
+    res.redirect(`/movies/${req.params.movieId}`);
+});
+
 router.get("/movies/:movieId/delete", isAuth, async (req, res) => {
     const id = req.params.movieId;
 
@@ -70,5 +78,4 @@ router.get("/movies/:movieId/delete", isAuth, async (req, res) => {
     res.redirect("/")
 })
 
- 
 module.exports = router;

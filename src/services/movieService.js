@@ -53,3 +53,5 @@ return Movie.findByIdAndUpdate(movieId, {$push: { casts: castId } });
 exports.deleteMovie = async (movieId) => { return Movie.findByIdAndDelete(movieId) }
 
 
+exports.updateMovie = (movieId, movieData) => Movie.findByIdAndUpdate(movieId, movieData);
+
