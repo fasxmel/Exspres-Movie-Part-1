@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const movieService = require('../services/movieService');
 const castService = require('../services/castService');
+const { isAuth } = require('../middlewares/authMiddlewares');
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth, (req, res) => {
     res.render('create')
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create', isAuth, async (req, res) => {
    const newMovie = req.body;
 try {
     await movieService.create(newMovie);
@@ -29,7 +30,7 @@ router.get('/movies/:movieId', async (req, res) => {
      
 });
 
-router.get('/movies/:movieId/attach', async (req, res) => {
+router.get('/movies/:movieId/attach', isAuth, async (req, res) => {
     //TODO: try catch block
      const movie = await movieService.getOne(req.params.movieId).lean();
      const casts = await castService.getAll().lean();
@@ -38,7 +39,7 @@ router.get('/movies/:movieId/attach', async (req, res) => {
      res.render('cast/attach', { ...movie, casts});
 });
 
-router.post('/movies/:movieId/attach', async (req, res) => {
+router.post('/movies/:movieId/attach', isAuth, async (req, res) => {
     //TODO: try catch block
     const movie = req.params.movieId;
     const castId = req.body.cast;
@@ -48,17 +49,11 @@ router.post('/movies/:movieId/attach', async (req, res) => {
     res.redirect(`/movies/${movie}/attach`);
 });
 
-router.get('/movies/:movieId/edit', async (req, res) => {
-    //TODO: try catch block
-    
-    if (!req.user) {
-        return res.redirect('/user/login');   
-    }
-
-    const movie = await movieService.getOne(req.params.movieId).lean();
-
-    
-    res.render('user/edit', { movie });
+router.get('/movies/:movieId/edit', isAuth, async (req, res) => {
+//TODO: try catch block   
+const movie = await movieService.getOne(req.params.movieId).lean();
+   
+res.render('user/edit', { movie });
 });
  
 module.exports = router;
