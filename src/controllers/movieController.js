@@ -2,13 +2,13 @@ const router = require('express').Router();
 const movieService = require('../services/movieService');
 const castService = require('../services/castService');
 const { isAuth } = require('../middlewares/authMiddlewares');
-
+const errors = require('../utils/errors');
 router.get('/create', isAuth, (req, res) => {
     res.render('create')
 });
 
 router.post('/create', isAuth, async (req, res) => {
-    //TODO: try catch block
+    
    const newMovie = {
        ...req.body,
        owner: req.user._id
@@ -18,8 +18,8 @@ try {
     await movieService.create(newMovie);
     res.redirect('/');
 } catch (error) {
-    console.error(error);
-    res.redirect('/create');
+    const message = errors.getErrorMessage(error)
+    res.status(400).render('create', { error: message, ...newMovie });
 }
    
 });

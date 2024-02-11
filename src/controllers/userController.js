@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const User = require('../models/user');
 const userService = require('../services/userService');
 const errors = require('../utils/errors');
 
@@ -7,14 +8,13 @@ res.render('user/register');
 });
 
 router.post('/register', async (req, res) => {
-const userData = req.body;
 
 try {
  await userService.register(userData);
  res.redirect('/user/login');
 } catch (error) {
   const message = errors.getErrorMessage(error)
-  res.render('user/register', { ...userData,error: message });
+  res.render('user/register', { ...userData, error: message });
 }
 
 });
@@ -25,14 +25,18 @@ res.render('user/login');
 });
 
 router.post('/login', async (req, res) => {
-//TODO: try catch block
 const { email, password } = req.body;
-
+try {
 const token = await userService.login(email, password);
-
-
 res.cookie('user', token);
 res.redirect('/');
+} catch (error) {
+  //TODO: message is not rendered
+  const message = errors.getErrorMessage(error)
+  console.log(message);
+  res.render('user/login', { ...req.body, error: message });
+}
+
 });
 
 router.get('/logout', (req, res) => {

@@ -17,23 +17,24 @@ exports.login = async (email, password) => {
   //TODO: try catch block
    const user = await User.findOne({ email });
 
-   if (!user) {
-     throw new Error('Cannot find email or password!');
-   }
-   
-   const isValid = await bcrypt.compare(password, user.password);
-
-   if (!isValid) {
-     throw new Error('Cannot find email or password!');
-   }
- const payload = {
-     _id: user._id, 
-      email: user.email,
-    }
- const token =  await jwt.sign(payload, SECRET, { expiresIn: '2d' });
- return token;
+  if (!user) {
+    throw new Error('Cannot find email or password!');
+  }
   
-}
+  const isValid = await bcrypt.compare(password, user.password);
+
+  if (!isValid) {
+    throw new Error('Cannot find email or password!');
+  }
+  const payload = {
+    _id: user._id, 
+     email: user.email,
+   }
+  const token =  await jwt.sign(payload, SECRET, { expiresIn: '2d' });
+
+return token;    
+   
+};
 
    
 
