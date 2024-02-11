@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const userService = require('../services/userService');
-
+const errors = require('../utils/errors');
 
 router.get('/register', (req, res) => {
 res.render('user/register');
@@ -13,8 +13,8 @@ try {
  await userService.register(userData);
  res.redirect('/user/login');
 } catch (error) {
-   
-res.render('user/register', { error: error.message });
+  const message = errors.getErrorMessage(error)
+  res.render('user/register', { ...userData,error: message });
 }
 
 });

@@ -3,8 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('../utils/jwt');
 const { SECRET } = require('../config/configEnv');
 
-exports.register = (userData) => {
-const user = User.findOne({ email: userData.email });
+exports.register = async (userData) => {
+  //TODO: try catch block
+const user = await User.findOne({ email: userData.email });
  if (user) {
    throw new Error('Email already exist!');
  }
