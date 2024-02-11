@@ -7,15 +7,16 @@ const userSchema = new Schema({
      required: true,
      lowercase: true,
      unique: true,
+     match: [/@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/, 'Invalid email address'],
+     minLength: [10, 'Email must be at least 10 characters long'],
     },
      password: { 
         type: String,
+        match: [/^[a-zA-Z0-9]+$/, 'Password must be alphanumeric characters only'],
+        minLength: [6, 'Password must be at least 6 characters long'],
         required: true,
     },
-    //  repetPassword: { 
-    //     type: String,
-    //     required: true,
-    // },
+    
 
 });
 

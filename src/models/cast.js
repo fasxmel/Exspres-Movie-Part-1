@@ -5,23 +5,28 @@ const castSchema = new Schema({
     name: {
         type: String, 
         required: true,
+        minLength: [5, 'Name must be at least 5 characters long'],
+        match: [/^[a-zA-Z0-9\s]+$/, 'Name must be only letters'],
 
     },
     age: {
         type: Number,
         required: true ,
+        min: 1,
         max: 120,
-        min: 14,
     },
     born: {
         type: String, 
         required: true,
+        minLength: [10, 'Born must be at least 10 characters long'],
+        match: [/^[a-zA-Z0-9\s]+$/, 'Born must be only letters'],
+
         },
     nameInMovie: {
         type: String, 
         required: true,
-        min: 1,
-        max: 10,
+        minLength: [5, 'NameInMovie must be at least 5 characters long'],
+        match: [/^[a-zA-Z0-9\s]+$/, 'NameInMovie must be only letters'],
     
         },
     castImage: {
