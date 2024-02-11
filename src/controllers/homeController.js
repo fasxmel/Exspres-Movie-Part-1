@@ -18,16 +18,13 @@ res.render('about');
 });
 
 router.get("/search", async (req, res) => {
+    //TODO: try catch block
 const movies = await movieService.getAll().lean()
 res.render("search", { movies })
 });
 
 router.post('/search', async (req, res) => {
- //const movies = await movieService.getAll().lean();
-// const { title, genre, year } = req.body;
-// const moviesResult = await movieService.search( title, genre, year );
-// console.log(title, genre, year);
-
+ //TODO: try catch block
 let movies = await movieService.search(req.body);
 console.log(movies)
 res.render('search', { movies });

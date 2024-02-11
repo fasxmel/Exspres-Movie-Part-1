@@ -13,6 +13,7 @@ const user = User.findOne({ email: userData.email });
 };
 
 exports.login = async (email, password) => {
+  //TODO: try catch block
    const user = await User.findOne({ email });
 
    if (!user) {

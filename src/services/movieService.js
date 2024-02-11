@@ -10,6 +10,7 @@ exports.getOne = (movieId) => Movie.findById(movieId).populate('casts');
 
 
 exports.search = async (data) => {
+    //TODO: try catch block
    let query = {}
 
     if (!data.title && !data.genre && !data.year) {
@@ -50,7 +51,10 @@ exports.attach = (movieId, castId) => {
 return Movie.findByIdAndUpdate(movieId, {$push: { casts: castId } });
 }
 
-exports.deleteMovie = async (movieId) => { return Movie.findByIdAndDelete(movieId) }
+exports.deleteMovie = async (movieId) => { 
+    //TODO: try catch block
+    return Movie.findByIdAndDelete(movieId) 
+}
 
 
 exports.updateMovie = (movieId, movieData) => Movie.findByIdAndUpdate(movieId, movieData);

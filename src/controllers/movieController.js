@@ -8,6 +8,7 @@ router.get('/create', isAuth, (req, res) => {
 });
 
 router.post('/create', isAuth, async (req, res) => {
+    //TODO: try catch block
    const newMovie = {
        ...req.body,
        owner: req.user._id
