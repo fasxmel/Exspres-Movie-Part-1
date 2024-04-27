@@ -1,2 +1,2 @@
-# Exspres-Movie-Part-1
-SoftUni WorkShop Part-1
+# Exspres-Movie
+WorkShop
